@@ -21,6 +21,5 @@ class DocumentRequest(models.Model):
     dateOfApproval = models.DateField()
     requestStatus = models.CharField(max_length=10)
 
-
     class Meta:
         db_table = "Document_Request"
