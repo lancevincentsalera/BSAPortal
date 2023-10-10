@@ -17,7 +17,7 @@ class Document(models.Model):
 
 class DocumentRequest(models.Model):
     doc_id = models.ForeignKey(Document, on_delete=models.CASCADE)
-    resident_id = models.ForeignKey('Portal.Resident', on_delete=models.CASCADE)
+    resident_id = models.ForeignKey('CreateAccount.Resident', on_delete=models.CASCADE)
     dateOfApproval = models.DateField()
     requestStatus = models.CharField(max_length=10)
 

@@ -1,5 +1,4 @@
 from django.db import models
-from dbBSAP.CreateAccount.models import User
 # Create your models here.
 
 
@@ -18,7 +17,7 @@ class Resource(models.Model):
 
 class BorrowResource(models.Model):
     borrowResources_id = models.BigAutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user_id = models.ForeignKey("CreateAccount.Resident", on_delete=models.CASCADE)
     resource_id = models.ForeignKey(Resource, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     borrowDate = models.DateField()

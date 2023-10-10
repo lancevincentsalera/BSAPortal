@@ -7,7 +7,7 @@ class HealthCenter(models.Model):
     healthCenter_id = models.BigAutoField(primary_key=True)
     healthCenter_name = models.CharField(max_length=25)
     contactInfo = models.CharField(max_length=11)
-    residents = models.ManyToManyField('Portal.Resident', through="Appointment")
+    residents = models.ManyToManyField('CreateAccount.Resident', through="Appointment")
 
     def __str__(self):
         return self.healthCenter_name
@@ -22,7 +22,7 @@ class Appointment(models.Model):
     timeOfAppointment = models.TimeField()
     dateOfApproval = models.DateField()
     appointmentStatus = models.CharField(max_length=10)
-    resident = models.ForeignKey('Portal.Resident', on_delete=models.CASCADE)
+    resident = models.ForeignKey('CreateAccount.Resident', on_delete=models.CASCADE)
     healthCenter = models.ForeignKey(HealthCenter, on_delete=models.CASCADE)
 
     class Meta:
