@@ -5,7 +5,7 @@ from django.db import models
 
 class Document(models.Model):
     doc_id = models.BigAutoField(primary_key=True)
-    CHOICES = (("I", "Certificate of Indigency"), ("B", "Baranggay Clearance"),
+    CHOICES = (("I", "Certificate of Indigency"), ("B", "Barangay Clearance"),
                ("R", "Certificate of Residency"), ("P", "Barangay Business Permit"),
                ("F", "Certificate of First-Time Job Seeker"), ("D", "PWD ID"))
     doc_type = models.CharField(max_length= 1, choices=CHOICES)
