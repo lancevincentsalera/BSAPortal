@@ -12,7 +12,7 @@ class Event(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField()
     event_status = models.CharField(max_length=1, choices=(("P", "Pending"), ("A", "Approved"), ("C", "Cancelled")))
-    location = models.TextField()
+    location = models.TextField() #address
 
     def __str__(self):
         return self.eventName
