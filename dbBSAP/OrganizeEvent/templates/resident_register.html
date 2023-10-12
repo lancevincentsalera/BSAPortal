@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Portal Login</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'register-styles.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'Barangay-Calumangan-Logo.png' %}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="left">
+            <img src="{% static 'resident-icon.png' %}" alt="Login Image">
+        </div>
+        <div class="right">
+            <h1>Register Resident</h1>
+            <form method="POST"">
+            {% csrf_token %}
+                <div class="input-container">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-container">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <!-- Hidden Fields -->
+                <input type="hidden" id="uer_type" name="user_type" value="R">
+                <div class="input-container">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" required>
+                </div>
+
+                <div class="input-container">
+                    <label for="lname">First Name</label>
+                    <input type="text" id="lname" name="last_name" required>
+                </div>
+
+                <div class="input-container">
+                    <label for="bdate">Birth Date</label>
+                    <input type="date" id="bdate" name="birth_date" required>
+                </div>
+                <div class="input-container">
+                    <label for="address">Current Address</label>
+                    <input type="text" id="address" name="present_address" required>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+                <p>Already have an account?</p>
+
+            <a href="{% url 'login' %}" class="register-button" type="button">Login</a>
+        </div>
+    </div>
+</body>
+
+{% if error_message %}
+<div class="error-message">{{ error_message }}</div>
+{% endif %}

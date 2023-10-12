@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'register-options.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="center">
+            <p>Register as</p>
+        </div>
+        <div class="row">
+            <a  href="{% url 'register-resident' %}"class="left">
+                <img src="{% static 'resident-icon.png' %}" alt="Resident Image">
+                <p>a Resident</p>
+            </a>
+            <a href="{% url 'register-org' %}" class="right">
+                <img src="{% static 'org-icon.png' %}" alt="Organization Image">
+                <p>an Organization</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

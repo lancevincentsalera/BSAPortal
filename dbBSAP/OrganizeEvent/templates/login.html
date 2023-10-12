@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Portal Login</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'login-styles2.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'Barangay-Calumangan-Logo.png' %}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="left">
+            <img src="{% static 'Barangay-Calumangan-Logo.png' %}" alt="Login Image">
+        </div>
+        <div class="right">
+            <h1>Login</h1>
+            <form method="POST">
+            {% csrf_token %}
+                <div class="input-container">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-container">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+             <div class="divider">
+                <p>or</p>
+            </div>
+
+            <a href="{% url 'register-options' %}" class="register-button" type="button">Register as a New User</a>
+        </div>
+    </div>
+</body>
+
+{% if error_message %}
+<div class="error-message">{{ error_message }}</div>
+{% endif %}

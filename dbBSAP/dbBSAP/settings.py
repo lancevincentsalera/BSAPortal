@@ -60,7 +60,7 @@ ROOT_URLCONF = 'dbBSAP.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['dbBSAP/OrganizeEvent/static'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

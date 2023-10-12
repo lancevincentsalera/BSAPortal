@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'events-reg-styles2.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'Barangay-Calumangan-Logo.png' %}">
+    <title>Events</title>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="{% static 'Barangay-Calumangan-Logo.png' %}" alt="logo">
+            </div>
+            <h1>Events</h1>
+            <a href="{% url 'login' %}" class="logout-button">Log Out</a>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="button-container">
+                <a href="{% url 'event' %}" class="view-events-button">View Barangay Calumangan's Existing Events</a>
+                <a href="{% url 'event-add' %}" class="scheduler-button">Schedule Another Event</a>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Details</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th>Modify</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for event in events %}
+                        <tr>
+                            <td>{{ event.eventName }}</td>
+                            <td>{{ event.details }}</td>
+                            <td>{{ event.start }}</td>
+                            <td>{{ event.end }}</td>
+                            <td>{{ event.location }}</td>
+                            <td>{{ event.event_status }}</td>
+                            <td class="action-buttons">
+                                <button class="edit-button">Edit</button>
+                                <button class="cancel-button">Cancel</button>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="7">No events available</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
