@@ -53,7 +53,7 @@ class ShowEvents(View):
 
 def create_event(request):
     if request.method == 'POST':
-        form = EventForm(request.POST)
+        form = EventForm(request.POST) #create events
         if form.is_valid():
             form.save()
             return redirect(org_event)  # Redirect to the event list view after creating the event
