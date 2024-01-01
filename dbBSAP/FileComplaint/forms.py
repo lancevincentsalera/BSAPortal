@@ -4,6 +4,7 @@ from django.apps import apps
 
 
 Resident = apps.get_model('CreateAccount', 'Resident')
+ComplaintDetails = apps.get_model('FileComplaint', 'ComplaintDetails')
 
 
 class ResidentForm(forms.ModelForm):
@@ -21,6 +22,15 @@ class ResidentForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput, label="username")
     password = forms.CharField(widget=forms.PasswordInput, label="password")
+
+class FileComplaintForm(forms.ModelForm):
+    complaint_type = forms.ChoiceField(choices=(("E", "Environment"), ("R", "Resident"), ("B", "Barangay")))
+    description = forms.CharField(widget=forms.Textarea)
+
+    class Meta:
+        model = ComplaintDetails
+        fields = ['complaint_type', 'description']
+
 
 
 

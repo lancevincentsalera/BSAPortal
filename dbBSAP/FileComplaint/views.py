@@ -2,7 +2,9 @@ from django.contrib import messages
 from django.db import connection
 from django.http import request
 from django.shortcuts import render, redirect
-from .forms import ResidentForm, LoginForm
+from django.urls import reverse
+
+from .forms import ResidentForm, LoginForm, FileComplaintForm
 from django.views.generic.base import View
 from django.apps import apps
 
@@ -23,9 +25,7 @@ class login(View):
         username = request.POST['username']
         password = request.POST['password']
         arg = [username, password]
-
         user = Resident.objects.get(username=username)
-        request.session['username'] = user.username
 
         cursor = connection.cursor()
         cursor.callproc('verifyLogin', arg)
@@ -33,7 +33,7 @@ class login(View):
         cursor.close()
         print(message)
         if message == "Login succesful":
-
+            request.session['user_id'] = user.user_id
             return redirect('complaint')
         else:
             return render(request, self.template_name, {'form': form, 'message': message})
@@ -86,11 +86,40 @@ class ResidentRegistration(View):
 
 class Complaint(View):
     template_name = "complaint.html"
-    user = request.session['complainant_id']
-    def get(self, request):
-        user = request.session['username']
 
-        return render(request, self.template_name)
+    def get(self, request):
+        user_id = request.session.get('user_id')
+        cursor = connection.cursor()
+        args = [user_id]
+        cursor.callproc('viewComplaints', args)
+        complaints = cursor.fetchall()
+        cursor.close()
+        return render(request, 'complaint.html', {'complaints': complaints})
+
+
+class FileComplaint(View):
+    template_name = "file_complaint.html"
+    def get(self, request):
+        filecomplaint = FileComplaintForm()
+        return render(request, self.template_name, {'form': filecomplaint})
+    def post(self, request):
+        filecomplaint = FileComplaintForm()
+        user_id = request.session.get('user_id')
+        complaintType = request.POST['complaint_type']
+        descript = request.POST['description']
+        args = [user_id, complaintType, descript]
+        cursor = connection.cursor()
+        cursor.callproc('fileComplaint', args)
+        result = cursor.fetchall()
+        message = result[0][0]
+        cursor.close()
+        if message == "Creating complaint successfully":
+            return redirect('complaint')
+        else:
+            message = "Complaint not created"
+        return render(request, self.template_name, {'form': filecomplaint, 'error_message': message})
+
+
 
 
 
