@@ -60,7 +60,7 @@ ROOT_URLCONF = 'dbBSAP.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'dbBSAP.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dbBSAP',
+        'NAME': 'dbbsap_complaint',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '127.0.0.1',
